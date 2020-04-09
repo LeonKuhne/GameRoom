@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game Room</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>Hello {{ user }}, choose one:</p>
+		<button v-for="game in choices" :key="game" v-on:click="submit(game)">{{ game }}</button>
+	</div>
+	
+	<script src="script.js"></script>
+</body>
+</html>
