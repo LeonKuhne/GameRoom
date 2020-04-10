@@ -1,7 +1,10 @@
-URL = "https://me2h5lz01i.execute-api.us-east-1.amazonaws.com/dev"
-endpoint = {
-	joinRoom: URL + "/room",
-	choice: URL + "/choice"
+URL = "https://me2h5lz01i.execute-api.us-east-1.amazonaws.com/dev",
+api = (endpoint, body, callback, method) => {
+	req = new XMLHttpRequest()
+	req.open(method, self.URL+"/"+endpoint)
+	req.responseType = 'json';
+	req.onload = callback
+	req.send(body)
 }
 
 window.onload = () => {
@@ -12,15 +15,9 @@ window.onload = () => {
 		},
 		methods: {
 			submit: (game) => {
-				fetch(endpoint.choice, {
-					method: "post",
-					body: {
-						user: this.user,
-						game: this.game
-					}
-				}, (res) => {
+				api("choose", {user: this.user, game: game}, (res) => {
 					this.choices = res.choices
-				})
+				}, "post")
 			}
 		}
 	})
@@ -38,13 +35,11 @@ window.onload = () => {
 		}),
 		methods: {
 			joinRoom: (user, room) => {
-				fetch(endpoint.joinRoom, {
-					method: "post",
-					body: { user, room }
-				}, (res) => {
+				api("room", { user, room }, (res) => {
 					this.room = room
 					this.choices = res.choices
-				})
+				}, "post")
+				
 			}
 		}
 	})
