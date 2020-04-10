@@ -3,13 +3,37 @@
 <head>
 	<title>Game Room</title>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="script.js"></script>
 </head>
 <body>
 	<div id="app">
-		<p>Hello {{ user }}, choose one:</p>
-		<button v-for="game in choices" :key="game" v-on:click="submit(game)">{{ game }}</button>
+
+		<!-- Get User Name -->
+		<div v-if="user == ''">
+			<input v-model="enteredName" placeholder="User Name" />
+			<button v-if="enteredName" v-on:click="user=enteredName">Set</button>
+			<p v-if="user">Hello {{ user }}</p>
+		</div>
+
+		<!-- Get Room Name -->
+		<div v-if="user != '' && room == ''">
+			<input v-model="enteredRoom" placeholder="Room Name" />
+			<button v-if="enteredRoom" v-on:click="joinRoom(user, enteredRoom)">Set</button>
+		</div>
+
+		<!-- Get Choices -->
+		<div v-if="room != ''">
+			<p>You have joined room: {{ room }}</p>
+
+			<p>Choose a game:</p>
+			<div id="chooser" :choices="choices">
+				<button v-for="game in choices"
+					:key="game"
+					v-on:click="submit(game)">
+					{{ game }}
+				</button>
+			</div>
+		</div>
 	</div>
-	
-	<script src="script.js"></script>
 </body>
 </html>
