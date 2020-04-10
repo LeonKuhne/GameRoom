@@ -2,7 +2,8 @@ URL = "https://me2h5lz01i.execute-api.us-east-1.amazonaws.com/dev",
 api = (endpoint, body, callback, method) => {
 	req = new XMLHttpRequest()
 	req.open(method, self.URL+"/"+endpoint)
-	req.responseType = 'json';
+	req.responseType = 'json'
+	req.setRequestHeader('tontent-type', 'application/json')
 	req.onload = callback
 	req.send(body)
 }
