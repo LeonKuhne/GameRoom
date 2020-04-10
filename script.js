@@ -5,7 +5,7 @@ api = (endpoint, body, callback, method) => {
 	req.responseType = 'json'
 	req.setRequestHeader('Content-Type', 'application/json')
 	req.onload = callback
-	req.send(body)
+	req.send(JSON.stringify(body))
 }
 
 window.onload = () => {
