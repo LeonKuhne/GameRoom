@@ -29,7 +29,7 @@
 			<div id="chooser" :choices="choices">
 				<button v-for="game in choices"
 					:key="game"
-					v-on:click="submit(game)">
+					v-on:click="makeChoice(game)">
 					{{ game }}
 				</button>
 			</div>

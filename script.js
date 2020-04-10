@@ -13,13 +13,6 @@ window.onload = () => {
 		props: {
 			choices: []
 		},
-		methods: {
-			submit: (game) => {
-				api("choose", {user: this.user, game: game}, (res) => {
-					this.choices = res.choices
-				}, "post")
-			}
-		}
 	})
 
 	// APP
@@ -37,9 +30,16 @@ window.onload = () => {
 			joinRoom: (user, room) => {
 				api("room", { user, room }, (res) => {
 					this.room = room
-					this.choices = res.choices
+					this.choices = nextChoice()
 				}, "post")
 				
+			},
+			makeChoice: (game) => {
+				// submit your choice
+				api("choose", {user: this.user, game: game}, (res) => {
+					// get next choices
+					this.choices = res.choices
+				}, "post")
 			}
 		}
 	})
