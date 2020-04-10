@@ -3,7 +3,7 @@ api = (endpoint, body, callback, method) => {
 	req = new XMLHttpRequest()
 	req.open(method, self.URL+"/"+endpoint)
 	req.responseType = 'json'
-	req.setRequestHeader('tontent-type', 'application/json')
+	req.setRequestHeader('Content-Type', 'application/json')
 	req.onload = callback
 	req.send(body)
 }
